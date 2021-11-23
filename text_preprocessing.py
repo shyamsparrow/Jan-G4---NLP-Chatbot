@@ -10,13 +10,13 @@ from unicodedata import normalize
 from typing import List, Optional, Union, Callable
 
 # Third party libraries
-import contractions
+#import contractions
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, PunktSentenceTokenizer
 from nltk.stem import PorterStemmer, SnowballStemmer, LancasterStemmer, WordNetLemmatizer
 from spellchecker import SpellChecker
-from names_dataset import NameDataset
+#from names_dataset import NameDataset
 
 nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
@@ -316,12 +316,3 @@ def preprocess_text(input_text: str, processing_function_list: Optional[List[Cal
         processed_text = ' '.join(input_text)
     return processed_text
 
-
-if __name__ == '__main__':
-    text_to_process = 'Helllo, I am John Doe!!! My email is john.doe@email.com. Visit our website www.johndoe.com'
-    preprocessed_text = preprocess_text(text_to_process)
-    print(preprocessed_text)
-
-    preprocess_functions = [to_lower, remove_email, remove_url, remove_punctuation, lemmatize_word]
-    preprocessed_text = preprocess_text(text_to_process, preprocess_functions)
-    print(preprocessed_text)
