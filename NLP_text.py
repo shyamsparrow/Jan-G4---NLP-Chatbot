@@ -154,7 +154,7 @@ class PreProcessing:
 
 
 
-    def substitute_token_method(self,token_list: List[str], sub_dict: Optional[dict] = None) -> List[str]:
+  def substitute_token_method(self,token_list: List[str], sub_dict: Optional[dict] = None) -> List[str]:
     """ Substitute each token by another token, e.g., 'vs' -> 'versus' """
     # TODO: add more custom substitutions in the csv file specified by _CUSTOM_SUB_CSV_FILE_PATH
     if token_list is None or len(token_list) == 0:
