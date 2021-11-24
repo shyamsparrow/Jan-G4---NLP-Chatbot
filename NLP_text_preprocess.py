@@ -1,5 +1,4 @@
 # Standard libraries
-!pip install pyspellchecker
 import os
 import re
 import string
