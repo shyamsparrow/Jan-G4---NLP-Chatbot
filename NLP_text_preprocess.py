@@ -20,12 +20,14 @@ nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
 nltk.download('punkt', quiet=True)
 
+
 class PreProcessing:
-  def __init__(self, to_lower = False,remove_url=False,remove_special_character=False, remove_punctuation=False,
+  def __init__(self, to_lower = False,remove_url=False,remove_time=False,remove_special_character=False, remove_punctuation=False,
                remove_whitespace=False,check_spelling=False,remove_stopword=False,lemmatize_word=False):
     
     self.to_lower = to_lower
     self.remove_url=remove_url
+    self.remove_time=remove_time
     self.remove_special_character=remove_special_character
     self.remove_punctuation=remove_punctuation
     self.remove_whitespace=remove_whitespace
@@ -41,7 +43,10 @@ class PreProcessing:
 
     if self.remove_url:
       input_text = self.remove_url_method(input_text)
-    
+
+    if self.remove_time:
+      input_text = self.remove_time_method(input_text)
+
     if self.remove_special_character:
       input_text = self.remove_special_character_method(input_text)
     
@@ -53,7 +58,8 @@ class PreProcessing:
       
     if self.check_spelling:
       input_text = self.check_spelling_method(input_text)
-      
+
+
     if self.remove_stopword:
       input_text = self.remove_stopword_method(input_text)
             
@@ -74,7 +80,10 @@ class PreProcessing:
     """ Remove url in the input text """
     return re.sub('(www|http)\S+', '', input_text)
 
-  
+ def remove_time_method(self,input_text:str)-> str:
+    """ Remove url in the input text """
+    return re.sub('(1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm])', '', input_text)
+
   def remove_punctuation_method(self,input_text:str)-> str:
     """
     Removes all punctuations from a string, as defined by string.punctuation or a custom list.
