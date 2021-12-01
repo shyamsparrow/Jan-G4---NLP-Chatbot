@@ -80,9 +80,9 @@ class PreProcessing:
     """ Remove url in the input text """
     return re.sub('(www|http)\S+', '', input_text)
 
- def remove_time_method(self,input_text:str)-> str:
+  def remove_time_method(self,input_text:str)-> str:
     """ Remove url in the input text """
-    return re.sub('(1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm])', '', input_text)
+    return re.sub('(1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp].?[Mm])', '', input_text)
 
   def remove_punctuation_method(self,input_text:str)-> str:
     """
