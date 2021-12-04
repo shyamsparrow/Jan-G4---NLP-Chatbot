@@ -1,6 +1,7 @@
 to_lower = True
 remove_url=True
 remove_time=True
+expand_contraction = True
 remove_special_character=True
 remove_punctuation=True
 remove_whitespace=True
