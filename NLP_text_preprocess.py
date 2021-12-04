@@ -10,6 +10,7 @@ from unicodedata import normalize
 from typing import List, Optional, Union, Callable
 
 # Third party libraries
+import contractions
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, PunktSentenceTokenizer
