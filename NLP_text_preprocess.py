@@ -24,7 +24,7 @@ nltk.download('punkt', quiet=True)
 
 class PreProcessing:
   def __init__(self, to_lower = False,remove_url=False,remove_time=False,expand_contraction=False,remove_special_character=False, remove_punctuation=False,
-               remove_whitespace=False,check_spelling=False,remove_stopword=False,lemmatize_word=False):
+               remove_whitespace=False,keep_alpha_numeric=False,check_spelling=False,remove_stopword=False,lemmatize_word=False):
     
     self.to_lower = to_lower
     self.remove_url=remove_url
@@ -33,6 +33,7 @@ class PreProcessing:
     self.remove_special_character=remove_special_character
     self.remove_punctuation=remove_punctuation
     self.remove_whitespace=remove_whitespace
+    self.keep_alpha_numeric = keep_alpha_numeric
     self.check_spelling=check_spelling
     self.remove_stopword=remove_stopword
     self.lemmatize_word=lemmatize_word
@@ -49,7 +50,7 @@ class PreProcessing:
     if self.remove_time:
       input_text = self.remove_time_method(input_text)
       
-     if self.expand_contraction:
+    if self.expand_contraction:
       input_text = self.expand_contraction_method(input_text)     
 
     if self.remove_special_character:
@@ -60,10 +61,12 @@ class PreProcessing:
 
     if self.remove_whitespace:
       input_text = self.remove_whitespace_method(input_text)
+    
+    if self.keep_alpha_numeric:
+      input_text = self.keep_alpha_numeric_method(input_text)
       
     if self.check_spelling:
       input_text = self.check_spelling_method(input_text)
-
 
     if self.remove_stopword:
       input_text = self.remove_stopword_method(input_text)
