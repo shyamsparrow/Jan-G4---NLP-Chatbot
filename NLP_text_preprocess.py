@@ -22,12 +22,13 @@ nltk.download('punkt', quiet=True)
 
 
 class PreProcessing:
-  def __init__(self, to_lower = False,remove_url=False,remove_time=False,remove_special_character=False, remove_punctuation=False,
+  def __init__(self, to_lower = False,remove_url=False,remove_time=False,expand_contraction=False,remove_special_character=False, remove_punctuation=False,
                remove_whitespace=False,check_spelling=False,remove_stopword=False,lemmatize_word=False):
     
     self.to_lower = to_lower
     self.remove_url=remove_url
     self.remove_time=remove_time
+    self.expand_contraction = expand_contraction
     self.remove_special_character=remove_special_character
     self.remove_punctuation=remove_punctuation
     self.remove_whitespace=remove_whitespace
@@ -46,6 +47,9 @@ class PreProcessing:
 
     if self.remove_time:
       input_text = self.remove_time_method(input_text)
+      
+     if self.expand_contraction:
+      input_text = self.expand_contraction_method(input_text)     
 
     if self.remove_special_character:
       input_text = self.remove_special_character_method(input_text)
@@ -83,6 +87,10 @@ class PreProcessing:
   def remove_time_method(self,input_text:str)-> str:
     """ Remove url in the input text """
     return re.sub('(1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp].?[Mm])', '', input_text)
+  
+  def expand_contraction_method(self,input_text: str) -> str:
+    """ Expand contractions in input text """
+    return contractions.fix(input_text)
 
   def remove_punctuation_method(self,input_text:str)-> str:
     """
@@ -113,6 +121,8 @@ class PreProcessing:
     """ Remove stop words """
 
     stop_words = set(stopwords.words('english'))
+    not_stop_words = ["not","nor", "after","before","above", "below","between"]
+    stop_words = stop_words.difference(not_stop_words)
     if isinstance(stop_words, list):
         stop_words = set(stop_words)
     if isinstance(input_text_or_list, str):
