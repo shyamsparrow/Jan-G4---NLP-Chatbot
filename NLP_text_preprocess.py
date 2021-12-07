@@ -144,7 +144,7 @@ class PreProcessing:
 
     if isinstance(input_text_or_list, str):
         tokens = word_tokenize(input_text_or_list)
-        processed_tokens = [lemmatizer.lemmatize(token) for token in tokens if token not in stop_words]
+        processed_tokens = [lemmatizer.lemmatize(token) for token in tokens]
     else:
         processed_tokens = [lemmatizer.lemmatize(token) for token in input_text_or_list if token is not None]
     return processed_tokens
